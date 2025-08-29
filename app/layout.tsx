@@ -26,7 +26,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} bg-[radial-gradient(#80808080_0.5px,transparent_1px)] [background-size:16px_16px] antialiased`}
             >
                 {children}
                 <NavDock />
