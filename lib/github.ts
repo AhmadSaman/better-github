@@ -19,19 +19,20 @@ export const getHeaders = () => {
     return headers
 }
 
-export async function fetchGitHubUsers() {
+export async function fetchGitHubUsers({ username }: { username: string }) {
     const searchParams = new URLSearchParams({
-        q: 'location:iraq',
+        q: `${username}`,
     })
     const response = await fetch(buildUrl('/api/users', searchParams), {
         headers: getHeaders(),
+        cache: 'force-cache',
     })
 
     if (!response.ok) {
         throw new Error('Failed to fetch users')
     }
     const { data } = await response.json()
-    console.log(data)
+
     return {
         totalCount: data.total_count,
         users: data.items.map(

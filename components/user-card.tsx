@@ -6,7 +6,7 @@ import Link from 'next/link'
 function UserCard({ name, avatarUrl }: { name: string; avatarUrl: string }) {
     return (
         <Link href={`/users/${name}`}>
-            <Card className="group w-[140px] transition-all duration-200 hover:scale-105">
+            <Card className="transition-all duration-200 hover:scale-105">
                 <CardHeader className="gap-3 p-1">
                     <Avatar className="mx-auto size-16">
                         <AvatarImage src={avatarUrl} alt={name} />
