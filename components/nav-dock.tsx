@@ -7,6 +7,7 @@ import { Button } from './ui/button'
 import { Separator } from './ui/separator'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
 
 const setCookie = (name: string, value: string) => {
     if (typeof document === 'undefined') return
@@ -53,26 +54,44 @@ function NavDock() {
             iconMagnification={50}
         >
             <DockIcon>
-                <Button
-                    variant={
-                        isActiveRoute('/repositories') ? 'outline' : 'ghost'
-                    }
-                    asChild
-                >
-                    <Link href="/repositories">
-                        <Warehouse size={16} />
-                    </Link>
-                </Button>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Button
+                            variant={
+                                isActiveRoute('/repositories')
+                                    ? 'default'
+                                    : 'ghost'
+                            }
+                            asChild
+                        >
+                            <Link href="/repositories">
+                                <Warehouse size={16} />
+                            </Link>
+                        </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Repositories</p>
+                    </TooltipContent>
+                </Tooltip>
             </DockIcon>
             <DockIcon>
-                <Button
-                    variant={isActiveRoute('/users') ? 'outline' : 'ghost'}
-                    asChild
-                >
-                    <Link href="/users">
-                        <Users size={16} />
-                    </Link>
-                </Button>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Button
+                            variant={
+                                isActiveRoute('/users') ? 'default' : 'ghost'
+                            }
+                            asChild
+                        >
+                            <Link href="/users">
+                                <Users size={16} />
+                            </Link>
+                        </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Users</p>
+                    </TooltipContent>
+                </Tooltip>
             </DockIcon>
             <Separator orientation="vertical" className="h-full" />
             <DockIcon>
