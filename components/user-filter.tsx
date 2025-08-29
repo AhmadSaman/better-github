@@ -11,15 +11,15 @@ const UserFilter = () => {
     const searchParams = useSearchParams()
     const router = useRouter()
 
-    const [value, setValue] = useState(searchParams.get('username') || '')
+    const [value, setValue] = useState(searchParams.get('search') || '')
 
     const handleSearch = () => {
         const params = new URLSearchParams(searchParams.toString())
 
         if (value.trim()) {
-            params.set('username', value.trim())
+            params.set('search', value.trim())
         } else {
-            params.delete('username')
+            params.delete('search')
         }
 
         router.push(`?${params.toString()}`)

@@ -1,3 +1,5 @@
+import { OctokitUsersType, OctokitUserType } from '@/config'
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || ''
 
 if (!BASE_URL) {
@@ -19,9 +21,9 @@ export const getHeaders = () => {
     return headers
 }
 
-export async function fetchGitHubUsers({ username }: { username: string }) {
+export async function fetchGitHubUsers({ search }: { search: string }) {
     const searchParams = new URLSearchParams({
-        q: `${username}`,
+        q: `${search}`,
     })
     const response = await fetch(buildUrl('/api/users', searchParams), {
         headers: getHeaders(),
@@ -29,9 +31,10 @@ export async function fetchGitHubUsers({ username }: { username: string }) {
     })
 
     if (!response.ok) {
-        throw new Error('Failed to fetch users')
+        console.error('Failed to fetch users')
+        return null
     }
-    const { data } = await response.json()
+    const { data }: OctokitUsersType = await response.json()
 
     return {
         totalCount: data.total_count,
@@ -41,5 +44,34 @@ export async function fetchGitHubUsers({ username }: { username: string }) {
                 avatarUrl: item.avatar_url,
             })
         ),
+    }
+}
+
+export async function fetchGitHubUser({ username }: { username: string }) {
+    const response = await fetch(buildUrl(`/api/users/${username}`), {
+        headers: getHeaders(),
+        cache: 'force-cache',
+    })
+
+    if (!response.ok) {
+        return null
+    }
+    const data: OctokitUserType = await response.json()
+
+    return {
+        username: data.login,
+        name: data.name,
+        company: data.company,
+        blog: data.blog,
+        email: data.email,
+        avatarUrl: data.avatar_url,
+        github: data.html_url,
+        followers: data.followers,
+        following: data.following,
+        bio: data.bio,
+        hireable: data.hireable,
+        location: data.location,
+        publicRepos: data.public_repos,
+        joined: data.created_at,
     }
 }
