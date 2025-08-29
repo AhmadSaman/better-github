@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { username: string } }
+    context: { params: Promise<{ username: string }> }
 ) {
+    const { username } = await context.params
     const response = await octokit.rest.users.getByUsername({
-        username: await params.username!,
+        username,
     })
 
-    const data = response
-    return NextResponse.json(data)
+    return NextResponse.json(response.data)
 }
