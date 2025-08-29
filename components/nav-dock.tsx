@@ -1,12 +1,42 @@
 'use client'
 
-import { Moon, Users, Warehouse } from 'lucide-react'
+import { Moon, Sun, Users, Warehouse } from 'lucide-react'
 import { Dock, DockIcon } from './ui/dock'
 import Link from 'next/link'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
+import { useEffect, useState } from 'react'
+
+const setCookie = (name: string, value: string) => {
+    if (typeof document === 'undefined') return
+
+    const expires = new Date()
+    expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000)
+
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`
+}
 
 function NavDock() {
+    const [isDark, setIsDark] = useState(false)
+
+    useEffect(() => {
+        const isDarkMode = document.documentElement.classList.contains('dark')
+        setIsDark(isDarkMode)
+    }, [])
+
+    const toggleDarkMode = () => {
+        const newDarkMode = !isDark
+        setIsDark(newDarkMode)
+
+        if (newDarkMode) {
+            document.documentElement.classList.add('dark')
+            setCookie('theme', 'dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+            setCookie('theme', 'light')
+        }
+    }
+
     return (
         <Dock
             direction="middle"
@@ -29,8 +59,8 @@ function NavDock() {
             </DockIcon>
             <Separator orientation="vertical" className="h-full" />
             <DockIcon>
-                <Button variant={'ghost'}>
-                    <Moon size={16} />
+                <Button variant={'ghost'} onClick={toggleDarkMode}>
+                    {isDark ? <Sun size={16} /> : <Moon size={16} />}
                 </Button>
             </DockIcon>
         </Dock>
