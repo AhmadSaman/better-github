@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 const setCookie = (name: string, value: string) => {
     if (typeof document === 'undefined') return
@@ -18,6 +19,14 @@ const setCookie = (name: string, value: string) => {
 
 function NavDock() {
     const [isDark, setIsDark] = useState(false)
+    const pathname = usePathname()
+
+    const isActiveRoute = (route: string) => {
+        if (route === '/') {
+            return pathname === '/'
+        }
+        return pathname === route || pathname.startsWith(route + '/')
+    }
 
     useEffect(() => {
         const isDarkMode = document.documentElement.classList.contains('dark')
@@ -40,18 +49,26 @@ function NavDock() {
     return (
         <Dock
             direction="middle"
-            className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 shadow-md"
+            className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 gap-2 shadow-md"
             iconMagnification={50}
         >
             <DockIcon>
-                <Button variant={'ghost'} asChild>
+                <Button
+                    variant={
+                        isActiveRoute('/repositories') ? 'outline' : 'ghost'
+                    }
+                    asChild
+                >
                     <Link href="/repositories">
                         <Warehouse size={16} />
                     </Link>
                 </Button>
             </DockIcon>
             <DockIcon>
-                <Button variant={'ghost'} asChild>
+                <Button
+                    variant={isActiveRoute('/users') ? 'outline' : 'ghost'}
+                    asChild
+                >
                     <Link href="/users">
                         <Users size={16} />
                     </Link>
