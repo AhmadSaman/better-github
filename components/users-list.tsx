@@ -1,6 +1,7 @@
 import React from 'react'
 import UserCard from './user-card'
 import { Users } from 'lucide-react'
+import ScrollToTop from './scroll-to-top'
 
 const UserList = ({
     users,
@@ -30,6 +31,8 @@ const UserList = ({
                     <p className="text-center font-semibold">No result Found</p>
                 </div>
             )}
+
+            <ScrollToTop />
         </section>
     )
 }
