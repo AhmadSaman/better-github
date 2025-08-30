@@ -1,4 +1,9 @@
-import { OctokitUsersType, OctokitUserType } from '@/config'
+import {
+    OctokitUserRepositoriesType,
+    OctokitUsersType,
+    OctokitUserType,
+} from '@/config'
+import { Repository } from '@/types/repository'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || ''
 
@@ -74,4 +79,36 @@ export async function fetchGitHubUser({ username }: { username: string }) {
         publicRepos: data.public_repos,
         joined: data.created_at,
     }
+}
+
+export async function fetchGitHubUserRepositories({
+    username,
+}: {
+    username: string
+}) {
+    const response = await fetch(buildUrl(`/api/repositories/${username}`), {
+        headers: getHeaders(),
+        cache: 'force-cache',
+    })
+
+    if (!response.ok) {
+        return null
+    }
+    const { data }: OctokitUserRepositoriesType = await response.json()
+
+    return {
+        repos: data.map((repo) => ({
+            name: repo.name,
+            owner: { name: repo.owner.login, avatarUrl: repo.owner.avatar_url },
+            starCount: repo.stargazers_count,
+            fork: repo.forks_count,
+            languages: repo.language,
+            topics: repo.topics,
+            issues: repo.open_issues_count,
+            isTemplate: repo.is_template,
+            createdAt: repo.created_at,
+            link: repo.homepage,
+            githubUrl: repo.html_url,
+        })),
+    } satisfies { repos: Repository[] }
 }

@@ -13,3 +13,7 @@ export type OctokitUserType = GetResponseTypeFromEndpointMethod<
 export type OctokitUsersType = GetResponseTypeFromEndpointMethod<
     typeof octokit.rest.search.users
 >
+
+export type OctokitUserRepositoriesType = GetResponseTypeFromEndpointMethod<
+    typeof octokit.rest.repos.listForUser
+>

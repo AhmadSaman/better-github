@@ -9,6 +9,5 @@ export async function GET(request: NextRequest) {
         q: query || '',
     })
 
-    const data = response
-    return NextResponse.json(data)
+    return NextResponse.json(response)
 }
