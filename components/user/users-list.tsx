@@ -1,4 +1,3 @@
-import React from 'react'
 import UserCard from './user-card'
 import { Users } from 'lucide-react'
 import ScrollToTop from '../scroll-to-top'

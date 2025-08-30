@@ -1,13 +1,17 @@
 'use client'
 
 import { Moon, Sun, Users, Warehouse } from 'lucide-react'
-import { Dock, DockIcon } from './ui/dock'
+import { Dock, DockIcon } from '@/components/ui/dock'
 import Link from 'next/link'
-import { Button } from './ui/button'
-import { Separator } from './ui/separator'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 const setCookie = (name: string, value: string) => {
     if (typeof document === 'undefined') return

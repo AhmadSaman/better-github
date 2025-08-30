@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 import { fetchGitHubUser } from '@/lib/github'
 import { ArrowLeft } from 'lucide-react'
-import React from 'react'
+
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
 

@@ -1,5 +1,5 @@
 import { fetchGitHubUserStarredRepositories } from '@/lib/github'
-import React from 'react'
+
 import RepositoriesList from '@/components/repository/repositories-list'
 
 export default async function UserStarredRepositories({

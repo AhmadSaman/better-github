@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Star, GitFork, GitBranch, Calendar, Globe, Github } from 'lucide-react'
@@ -6,7 +5,6 @@ import { formatDistanceToNow } from 'date-fns'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Repository } from '@/types/repository'
-import { cn } from '@/lib/utils'
 
 interface RepositoryCardProps {
     repository: Repository
@@ -28,18 +26,15 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
     } = repository
 
     return (
-        <Card className="cursor-pointer gap-3 transition-all duration-200 hover:scale-105 md:w-[300px] lg:w-[350px]">
+        <Card className="w-[350px] cursor-pointer gap-3 transition-all duration-200 hover:scale-105">
             <CardHeader>
                 <div className="flex flex-wrap items-start justify-between gap-2">
                     <div className="flex-1">
                         <CardTitle>
                             <p
-                                className={cn(
-                                    'whitespace-wrap overflow-hidden text-lg font-semibold break-all text-ellipsis',
-                                    {
-                                        'text-sm': name.length > 18,
-                                    }
-                                )}
+                                className={
+                                    'whitespace-wrap overflow-hidden text-lg font-semibold break-all text-ellipsis'
+                                }
                                 title={name}
                             >
                                 {name}
