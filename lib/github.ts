@@ -1,10 +1,4 @@
-import {
-    OctokitRepositoriesType,
-    OctokitUserRepositoriesType,
-    OctokitUsersType,
-    OctokitUserType,
-} from '@/config'
-import { Repository } from '@/types/repository'
+import { OctokitUserType } from '@/config'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || ''
 
@@ -25,32 +19,6 @@ export const buildUrl = (pathname: string, searchParams?: URLSearchParams) => {
 export const getHeaders = () => {
     const headers = new Headers()
     return headers
-}
-
-export async function fetchGitHubUsers({ search }: { search: string }) {
-    const searchParams = new URLSearchParams({
-        q: `${search}`,
-    })
-    const response = await fetch(buildUrl('/api/users', searchParams), {
-        headers: getHeaders(),
-        cache: 'force-cache',
-    })
-
-    if (!response.ok) {
-        console.error('Failed to fetch users')
-        return null
-    }
-    const { data }: OctokitUsersType = await response.json()
-
-    return {
-        totalCount: data.total_count,
-        users: data.items.map(
-            (item: { login: string; avatar_url: string }) => ({
-                name: item.login,
-                avatarUrl: item.avatar_url,
-            })
-        ),
-    }
 }
 
 export async function fetchGitHubUser({ username }: { username: string }) {
@@ -80,107 +48,4 @@ export async function fetchGitHubUser({ username }: { username: string }) {
         publicRepos: data.public_repos,
         joined: data.created_at,
     }
-}
-
-export async function fetchGitHubUserRepositories({
-    username,
-}: {
-    username: string
-}) {
-    const response = await fetch(buildUrl(`/api/repositories/${username}`), {
-        headers: getHeaders(),
-        cache: 'force-cache',
-    })
-
-    if (!response.ok) {
-        return null
-    }
-    const { data }: OctokitUserRepositoriesType = await response.json()
-
-    return {
-        repos: data.map((repo) => ({
-            name: repo.name,
-            owner: { name: repo.owner.login, avatarUrl: repo.owner.avatar_url },
-            starCount: repo.stargazers_count,
-            fork: repo.forks_count,
-            languages: repo.language,
-            topics: repo.topics,
-            issues: repo.open_issues_count,
-            isTemplate: repo.is_template,
-            createdAt: repo.created_at,
-            link: repo.homepage,
-            githubUrl: repo.html_url,
-        })),
-    } satisfies { repos: Repository[] }
-}
-
-export async function fetchGitHubUserStarredRepositories({
-    username,
-}: {
-    username: string
-}) {
-    const response = await fetch(
-        buildUrl(`/api/repositories/${username}/starred`),
-        {
-            headers: getHeaders(),
-            cache: 'force-cache',
-        }
-    )
-
-    if (!response.ok) {
-        return null
-    }
-    const { data }: OctokitUserRepositoriesType = await response.json()
-
-    return {
-        repos: data.map((repo) => ({
-            name: repo.name,
-            owner: { name: repo.owner.login, avatarUrl: repo.owner.avatar_url },
-            starCount: repo.stargazers_count,
-            fork: repo.forks_count,
-            languages: repo.language,
-            topics: repo.topics,
-            issues: repo.open_issues_count,
-            isTemplate: repo.is_template,
-            createdAt: repo.created_at,
-            link: repo.homepage,
-            githubUrl: repo.html_url,
-        })),
-    } satisfies { repos: Repository[] }
-}
-
-export async function fetchGitHubRepositories({ search }: { search: string }) {
-    const searchParams = new URLSearchParams({
-        q: `${search}`,
-    })
-    const response = await fetch(buildUrl('/api/repositories', searchParams), {
-        headers: getHeaders(),
-        cache: 'force-cache',
-    })
-
-    if (!response.ok) {
-        console.error('Failed to fetch users')
-        return null
-    }
-    const { data }: OctokitRepositoriesType = await response.json()
-
-    return {
-        totalCount: data.total_count,
-        repos: data.items.map((repo) => ({
-            name: repo.name,
-            owner: {
-                name: repo.owner?.login,
-                avatarUrl: repo.owner?.avatar_url,
-            },
-            starCount: repo.stargazers_count,
-            fork: repo.forks_count,
-            languages: repo.language,
-            topics: repo.topics,
-            issues: repo.open_issues_count,
-            isTemplate: repo.is_template,
-            createdAt: repo.created_at,
-            link: repo.homepage,
-            githubUrl: repo.html_url,
-        })),
-    } satisfies { totalCount: number; repos: Repository[] }
 }
