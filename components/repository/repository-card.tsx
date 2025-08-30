@@ -74,7 +74,7 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
                             </a>
                         </Button>
                     )}
-                    {link && (
+                    {githubUrl && (
                         <Button
                             asChild
                             className="size-6 rounded-full transition-all duration-200 hover:scale-110"
