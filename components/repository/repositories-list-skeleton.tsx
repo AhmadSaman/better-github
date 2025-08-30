@@ -12,7 +12,7 @@ export default function RepositoriesListSkeleton({
     return (
         <div className={className}>
             {skeletons.map((_, index) => (
-                <Skeleton key={index} className={'h-[155px] w-[350px]'} />
+                <Skeleton key={index} className="h-[150px] w-[350px]" />
             ))}
         </div>
     )

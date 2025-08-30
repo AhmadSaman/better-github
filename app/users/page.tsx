@@ -1,7 +1,9 @@
-import UserFilter from '@/components/user/user-filter'
+import { Skeleton } from '@/components/ui/skeleton'
+import SearchFilter from '@/components/search-filter'
 import UsersList from '@/components/user/users-list'
 import UsersListSkeleton from '@/components/user/users-list-skeleton'
 import { fetchGitHubUsers } from '@/lib/github'
+import { Users } from 'lucide-react'
 
 import React, { Suspense } from 'react'
 
@@ -12,12 +14,28 @@ export default async function Page({
 }) {
     const { search } = await searchParams
     return (
-        <main className="container mx-auto flex flex-col gap-6 p-4">
+        <main className="container m-4 mx-auto flex flex-col gap-2 rounded-xl p-8">
             <div className="flex flex-col gap-2">
-                <h1 className="text-2xl font-bold">Users</h1>
-                <UserFilter />
+                <div className="flex items-center gap-2">
+                    <Users size={24} />
+                    <h1 className="text-2xl font-bold">Users</h1>
+                </div>
+                <SearchFilter />
             </div>
-            <Suspense key={search} fallback={<UsersListSkeleton />}>
+            <Suspense
+                key={search}
+                fallback={
+                    <section className="flex flex-col gap-1">
+                        <div className="mx-1 flex items-center gap-1 text-xs font-medium text-gray-400">
+                            <Users size={14} />
+                            <span>
+                                <Skeleton className="h-[16px] w-[88px] rounded-xl" />
+                            </span>
+                        </div>
+                        <UsersListSkeleton />
+                    </section>
+                }
+            >
                 <UsersListContent search={search} />
             </Suspense>
         </main>

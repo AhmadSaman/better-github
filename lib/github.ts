@@ -1,4 +1,5 @@
 import {
+    OctokitRepositoriesType,
     OctokitUserRepositoriesType,
     OctokitUsersType,
     OctokitUserType,
@@ -146,4 +147,40 @@ export async function fetchGitHubUserStarredRepositories({
             githubUrl: repo.html_url,
         })),
     } satisfies { repos: Repository[] }
+}
+
+export async function fetchGitHubRepositories({ search }: { search: string }) {
+    const searchParams = new URLSearchParams({
+        q: `${search}`,
+    })
+    const response = await fetch(buildUrl('/api/repositories', searchParams), {
+        headers: getHeaders(),
+        cache: 'force-cache',
+    })
+
+    if (!response.ok) {
+        console.error('Failed to fetch users')
+        return null
+    }
+    const { data }: OctokitRepositoriesType = await response.json()
+
+    return {
+        totalCount: data.total_count,
+        repos: data.items.map((repo) => ({
+            name: repo.name,
+            owner: {
+                name: repo.owner?.login,
+                avatarUrl: repo.owner?.avatar_url,
+            },
+            starCount: repo.stargazers_count,
+            fork: repo.forks_count,
+            languages: repo.language,
+            topics: repo.topics,
+            issues: repo.open_issues_count,
+            isTemplate: repo.is_template,
+            createdAt: repo.created_at,
+            link: repo.homepage,
+            githubUrl: repo.html_url,
+        })),
+    } satisfies { totalCount: number; repos: Repository[] }
 }

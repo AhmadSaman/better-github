@@ -26,7 +26,7 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
     } = repository
 
     return (
-        <Card className="w-[350px] cursor-pointer gap-3 transition-all duration-200 hover:scale-105">
+        <Card className="cursor-pointer gap-3 transition-all duration-200 hover:scale-105">
             <CardHeader>
                 <div className="flex flex-wrap items-start justify-between gap-2">
                     <div className="flex-1">
