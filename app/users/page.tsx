@@ -13,7 +13,10 @@ export default async function Page({
     const { search } = await searchParams
     return (
         <main className="container mx-auto flex flex-col gap-6 p-4">
-            <UserFilter />
+            <div className="flex flex-col gap-2">
+                <h1 className="text-2xl font-bold">Users</h1>
+                <UserFilter />
+            </div>
             <Suspense key={search} fallback={<UsersListSkeleton />}>
                 <UsersListContent search={search} />
             </Suspense>
