@@ -1,6 +1,7 @@
 export interface Repository {
     name: string
     githubUrl: string
+    description?: string | null
     starCount?: number
     fork?: number
     languages?: string | null
