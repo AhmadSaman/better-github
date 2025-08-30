@@ -1,26 +1,36 @@
 'use client'
-import RepositoryCard from './repository-card'
+
 import { Repository } from '@/types/repository'
 import ScrollToTop from '../scroll-to-top'
 import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
-import { getGithubRepositories } from '@/app/repositories/actions'
+import {
+    getGithubUserRepositories,
+    getGithubUserStarredRepositories,
+} from '@/app/repositories/actions'
+import RepositoryCard from '../repository/repository-card'
 
 interface RepositoriesListProps {
     repositories: Repository[]
-    search: string
+    type: 'starred' | 'public'
+    username: string
     className?: string
 }
 
 export default function RepositoriesList({
     repositories,
-    search,
+    username,
+    type,
     className = 'grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3',
 }: RepositoriesListProps) {
     const { data, ref, hasMore } = useInfiniteScroll<Repository>({
         initialData: repositories,
         fetchFunction: async (page: number) => {
-            const response = await getGithubRepositories({ search, page })
+            const getRepoFunction =
+                type === 'public'
+                    ? getGithubUserRepositories
+                    : getGithubUserStarredRepositories
+            const response = await getRepoFunction({ username, page })
             return response?.repos || []
         },
     })
@@ -37,7 +47,7 @@ export default function RepositoriesList({
             ) : (
                 <div className="h-full">
                     <p className="text-center font-semibold">
-                        No Public repositories found.
+                        No repositories found.
                     </p>
                 </div>
             )}

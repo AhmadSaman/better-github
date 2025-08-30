@@ -1,10 +1,10 @@
-import { fetchGitHubRepositories } from '@/lib/github'
 import RepositoriesList from '@/components/repository/repositories-list'
 import { Warehouse } from 'lucide-react'
 import { Suspense } from 'react'
 import RepositoriesListSkeleton from '@/components/repository/repositories-list-skeleton'
 import { Skeleton } from '@/components/ui/skeleton'
 import SearchFilter from '@/components/search-filter'
+import { getGithubRepositories } from './actions'
 
 export default async function Page({
     searchParams,
@@ -41,7 +41,7 @@ export default async function Page({
 }
 
 async function RepositoriesListContent({ search }: { search: string }) {
-    const repositoriesData = await fetchGitHubRepositories({
+    const repositoriesData = await getGithubRepositories({
         search: search,
     })
 
@@ -66,6 +66,7 @@ async function RepositoriesListContent({ search }: { search: string }) {
             </div>
             <div className="mx-auto lg:mx-0">
                 <RepositoriesList
+                    search={search}
                     className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
                     repositories={repos}
                 />

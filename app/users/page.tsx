@@ -2,8 +2,9 @@ import { Skeleton } from '@/components/ui/skeleton'
 import SearchFilter from '@/components/search-filter'
 import UsersList from '@/components/user/users-list'
 import UsersListSkeleton from '@/components/user/users-list-skeleton'
-import { fetchGitHubUsers } from '@/lib/github'
 import { Users } from 'lucide-react'
+
+import { getGitHubUsers } from '@/app/users/actions'
 
 import React, { Suspense } from 'react'
 
@@ -43,8 +44,14 @@ export default async function Page({
 }
 
 async function UsersListContent({ search }: { search: string }) {
-    const data = await fetchGitHubUsers({ search })
-    return <UsersList users={data?.users || []} total={data?.totalCount || 0} />
+    const data = await getGitHubUsers({ search, page: 1 })
+    return (
+        <UsersList
+            users={data?.users || []}
+            total={data?.totalCount || 0}
+            search={search}
+        />
+    )
 }
 
 export const revalidate = 0

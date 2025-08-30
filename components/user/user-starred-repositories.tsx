@@ -1,13 +1,12 @@
-import { fetchGitHubUserStarredRepositories } from '@/lib/github'
-
-import RepositoriesList from '@/components/repository/repositories-list'
+import RepositoriesList from '@/components/user/users-repositories-list'
+import { getGithubUserStarredRepositories } from '@/app/repositories/actions'
 
 export default async function UserStarredRepositories({
     username,
 }: {
     username: string
 }) {
-    const data = await fetchGitHubUserStarredRepositories({ username })
+    const data = await getGithubUserStarredRepositories({ username })
 
     if (!data) {
         return (
@@ -23,7 +22,11 @@ export default async function UserStarredRepositories({
 
     return (
         <div className="p-3">
-            <RepositoriesList repositories={repos} />
+            <RepositoriesList
+                type="starred"
+                repositories={repos}
+                username={username}
+            />
         </div>
     )
 }

@@ -1,8 +1,7 @@
-import { fetchGitHubUserRepositories } from '@/lib/github'
-
-import RepositoriesList from '@/components/repository/repositories-list'
+import RepositoriesList from '@/components/user/users-repositories-list'
 import { Suspense } from 'react'
 import RepositoriesListSkeleton from '../repository/repositories-list-skeleton'
+import { getGithubUserRepositories } from '@/app/repositories/actions'
 
 export default async function UserRepositories({
     username,
@@ -19,7 +18,7 @@ export default async function UserRepositories({
 }
 
 async function RepositoriesListContent({ username }: { username: string }) {
-    const data = await fetchGitHubUserRepositories({ username })
+    const data = await getGithubUserRepositories({ username })
     if (!data) {
         return (
             <div className="p-3">
@@ -32,5 +31,11 @@ async function RepositoriesListContent({ username }: { username: string }) {
 
     const { repos } = data
 
-    return <RepositoriesList repositories={repos} />
+    return (
+        <RepositoriesList
+            type="public"
+            username={username}
+            repositories={repos}
+        />
+    )
 }
