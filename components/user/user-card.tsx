@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, CardHeader, CardTitle } from './ui/card'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Card, CardHeader, CardTitle } from '../ui/card'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import Link from 'next/link'
 
 function UserCard({ name, avatarUrl }: { name: string; avatarUrl: string }) {

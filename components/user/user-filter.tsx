@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Input } from './ui/input'
-import { Button } from './ui/button'
+import { Input } from '../ui/input'
+import { Button } from '../ui/button'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { Label } from './ui/label'
-import { Switch } from './ui/switch'
+import { Label } from '../ui/label'
+import { Switch } from '../ui/switch'
 
 const UserFilter = () => {
     const searchParams = useSearchParams()

@@ -7,8 +7,8 @@ import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
 
 import Link from 'next/link'
-import UserTabs from '@/components/user-tabs'
-import UserBadges from '@/components/user-badges'
+import UserTabs from '@/components/user/user-tabs'
+import UserBadges from '@/components/user/user-badges'
 import { notFound } from 'next/navigation'
 
 interface PageProps {
@@ -29,7 +29,7 @@ export default async function Page({ params }: PageProps) {
         <section className="container m-4 mx-auto rounded-xl p-8">
             <Button
                 size={'icon'}
-                className="rounded-full transition-all duration-100 hover:scale-110"
+                className="rounded-full transition-all duration-200 hover:scale-105"
                 variant={'outline'}
                 asChild
             >
@@ -93,7 +93,8 @@ export default async function Page({ params }: PageProps) {
                 {userInfo.bio && (
                     <p className="w-1/2 text-center">{userInfo.bio}</p>
                 )}
-                <UserTabs />
+
+                <UserTabs username={username} />
             </div>
         </section>
     )

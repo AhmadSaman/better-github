@@ -1,14 +1,16 @@
-import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ChartBar, Star, Warehouse } from 'lucide-react'
+import UserRepositories from './user-repositories'
 
-export default function UserTabs() {
+export default function UserTabs({ username }: { username: string }) {
     return (
-        <Tabs defaultValue="tab-1" className="relative w-full items-center">
-            <Separator className="absolute right-0 bottom-1/2" />
+        <Tabs
+            defaultValue="repositories"
+            className="relative w-full items-center"
+        >
             <TabsList className="h-auto gap-10 rounded-none border-b bg-transparent p-0">
                 <TabsTrigger
-                    value="tab-1"
+                    value="repositories"
                     className="data-[state=active]:after:bg-primary relative flex-col rounded-none px-4 py-2 text-xs after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
                 >
                     <Warehouse
@@ -20,7 +22,7 @@ export default function UserTabs() {
                 </TabsTrigger>
 
                 <TabsTrigger
-                    value="tab-3"
+                    value="charts"
                     className="data-[state=active]:after:bg-primary relative flex-col rounded-none px-4 py-2 text-xs after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
                 >
                     <ChartBar
@@ -31,7 +33,7 @@ export default function UserTabs() {
                     Charts
                 </TabsTrigger>
                 <TabsTrigger
-                    value="tab-2"
+                    value="starred"
                     className="data-[state=active]:after:bg-primary relative flex-col rounded-none px-4 py-2 text-xs after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
                 >
                     <Star
@@ -42,19 +44,17 @@ export default function UserTabs() {
                     Starred
                 </TabsTrigger>
             </TabsList>
-            <TabsContent value="tab-1">
+            <TabsContent value="repositories">
+                <UserRepositories username={username} />
+            </TabsContent>
+            <TabsContent value="charts">
                 <p className="text-muted-foreground p-4 text-center text-xs">
-                    Content for Tab 1
+                    charts goes here
                 </p>
             </TabsContent>
-            <TabsContent value="tab-2">
+            <TabsContent value="starred">
                 <p className="text-muted-foreground p-4 text-center text-xs">
-                    Content for Tab 2
-                </p>
-            </TabsContent>
-            <TabsContent value="tab-3">
-                <p className="text-muted-foreground p-4 text-center text-xs">
-                    Content for Tab 3
+                    starred repos goe here
                 </p>
             </TabsContent>
         </Tabs>

@@ -9,7 +9,7 @@ function Error() {
         <section className="container m-4 mx-auto rounded-xl p-8">
             <Button
                 size={'icon'}
-                className="rounded-full transition-all duration-100 hover:scale-110"
+                className="rounded-full transition-all duration-200 hover:scale-105"
                 variant={'outline'}
                 asChild
             >
