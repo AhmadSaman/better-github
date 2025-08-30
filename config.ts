@@ -17,3 +17,8 @@ export type OctokitUsersType = GetResponseTypeFromEndpointMethod<
 export type OctokitUserRepositoriesType = GetResponseTypeFromEndpointMethod<
     typeof octokit.rest.repos.listForUser
 >
+
+export type OctokitUserStarredRepositoriesType =
+    GetResponseTypeFromEndpointMethod<
+        typeof octokit.rest.activity.listReposStarredByUser
+    >

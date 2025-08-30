@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Star, GitFork, GitBranch, Calendar, Globe, Github } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { Button } from '../ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import { Repository } from '@/types/repository'
 import { cn } from '@/lib/utils'
 
@@ -28,7 +28,7 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
     } = repository
 
     return (
-        <Card className="cursor-pointer gap-3 transition-all duration-200 hover:scale-105">
+        <Card className="cursor-pointer gap-3 transition-all duration-200 hover:scale-105 md:w-[300px] lg:w-[350px]">
             <CardHeader>
                 <div className="flex flex-wrap items-start justify-between gap-2">
                     <div className="flex-1">
@@ -133,7 +133,7 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
                         </Badge>
                     )}
                     {topics &&
-                        topics.slice(0, 3).map((topic, index) => (
+                        topics.slice(0, 2).map((topic, index) => (
                             <Badge
                                 key={index}
                                 variant="secondary"
@@ -142,9 +142,9 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
                                 {topic}
                             </Badge>
                         ))}
-                    {topics && topics.length > 3 && (
+                    {topics && topics.length > 2 && (
                         <Badge variant="secondary" className="text-[10px]">
-                            +{topics.length - 3} more
+                            +{topics.length - 2} more
                         </Badge>
                     )}
                 </div>

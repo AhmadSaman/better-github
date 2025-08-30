@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ChartBar, Star, Warehouse } from 'lucide-react'
+import { Star, Warehouse } from 'lucide-react'
 import UserRepositories from './user-repositories'
+import UserStarredRepositories from './user-starred-repositories'
 
 export default function UserTabs({ username }: { username: string }) {
     return (
@@ -22,17 +23,6 @@ export default function UserTabs({ username }: { username: string }) {
                 </TabsTrigger>
 
                 <TabsTrigger
-                    value="charts"
-                    className="data-[state=active]:after:bg-primary relative flex-col rounded-none px-4 py-2 text-xs after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
-                >
-                    <ChartBar
-                        className="mb-1.5 opacity-60"
-                        size={16}
-                        aria-hidden="true"
-                    />
-                    Charts
-                </TabsTrigger>
-                <TabsTrigger
                     value="starred"
                     className="data-[state=active]:after:bg-primary relative flex-col rounded-none px-4 py-2 text-xs after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
                 >
@@ -47,15 +37,9 @@ export default function UserTabs({ username }: { username: string }) {
             <TabsContent value="repositories">
                 <UserRepositories username={username} />
             </TabsContent>
-            <TabsContent value="charts">
-                <p className="text-muted-foreground p-4 text-center text-xs">
-                    charts goes here
-                </p>
-            </TabsContent>
+
             <TabsContent value="starred">
-                <p className="text-muted-foreground p-4 text-center text-xs">
-                    starred repos goe here
-                </p>
+                <UserStarredRepositories username={username} />
             </TabsContent>
         </Tabs>
     )

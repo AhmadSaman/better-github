@@ -112,3 +112,38 @@ export async function fetchGitHubUserRepositories({
         })),
     } satisfies { repos: Repository[] }
 }
+
+export async function fetchGitHubUserStarredRepositories({
+    username,
+}: {
+    username: string
+}) {
+    const response = await fetch(
+        buildUrl(`/api/repositories/${username}/starred`),
+        {
+            headers: getHeaders(),
+            cache: 'force-cache',
+        }
+    )
+
+    if (!response.ok) {
+        return null
+    }
+    const { data }: OctokitUserRepositoriesType = await response.json()
+
+    return {
+        repos: data.map((repo) => ({
+            name: repo.name,
+            owner: { name: repo.owner.login, avatarUrl: repo.owner.avatar_url },
+            starCount: repo.stargazers_count,
+            fork: repo.forks_count,
+            languages: repo.language,
+            topics: repo.topics,
+            issues: repo.open_issues_count,
+            isTemplate: repo.is_template,
+            createdAt: repo.created_at,
+            link: repo.homepage,
+            githubUrl: repo.html_url,
+        })),
+    } satisfies { repos: Repository[] }
+}
