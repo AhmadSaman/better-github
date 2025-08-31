@@ -6,17 +6,12 @@ import { Skeleton } from '@/components/ui/skeleton'
 import SearchFilter from '@/components/search-filter'
 import { getRepositories } from './actions'
 import RepositoryAdvancedFilters from '@/components/repository/repository-advanced-filters'
+import { RepositoryFilterParams } from '@/types/repository'
 
 export default async function Page({
     searchParams,
 }: {
-    searchParams: {
-        search?: string
-        username?: string
-        min_stars?: string
-        max_stars?: string
-        languages?: string
-    }
+    searchParams: RepositoryFilterParams
 }) {
     const { search, username, min_stars, max_stars, languages } =
         await searchParams
@@ -76,13 +71,7 @@ async function RepositoriesListContent({
     min_stars,
     max_stars,
     languages,
-}: {
-    search: string
-    username?: string
-    min_stars?: string
-    max_stars?: string
-    languages?: string
-}) {
+}: RepositoryFilterParams) {
     const repositoriesData = await getRepositories({
         search,
         username,

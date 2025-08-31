@@ -2,7 +2,7 @@
 
 import { buildUrl, getHeaders } from '@/config/url'
 import { OctokitRepositoriesType } from '@/types/github'
-import { Repository } from '@/types/repository'
+import { Repository, RepositoryFilterParams } from '@/types/repository'
 
 export async function getRepositories({
     search,
@@ -12,13 +12,8 @@ export async function getRepositories({
     languages,
     page = 1,
 }: {
-    search: string
-    username?: string
-    min_stars?: string
-    max_stars?: string
-    languages?: string
     page?: number
-}) {
+} & RepositoryFilterParams) {
     let query = search
 
     if (username) {
