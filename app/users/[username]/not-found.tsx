@@ -1,9 +1,9 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, UserRoundX } from 'lucide-react'
 import Link from 'next/link'
 
-function Error() {
+function NotFound() {
     return (
         <section className="container m-4 mx-auto rounded-xl p-8">
             <Button
@@ -17,10 +17,13 @@ function Error() {
                 </Link>
             </Button>
             <div className="flex flex-col items-center gap-10">
-                <p className="text-lg text-red-500">User not found</p>
+                <span className="text-muted-foreground">
+                    <UserRoundX />
+                </span>
+                <p className="text-lg">User not found</p>
             </div>
         </section>
     )
 }
 
-export default Error
+export default NotFound

@@ -2,6 +2,7 @@ import { getUsers } from '@/app/users/actions'
 import { Users } from 'lucide-react'
 import UsersList from './users-list'
 import { UserFilterParams } from '@/types/users'
+import { notFound } from 'next/navigation'
 
 export default async function UsersContent({
     search,
@@ -22,12 +23,7 @@ export default async function UsersContent({
     })
 
     if (!data) {
-        return (
-            <div className="container mx-auto px-4 py-8">
-                <h1 className="mb-6 text-2xl font-bold">Users</h1>
-                <p className="text-muted-foreground">Failed to load users.</p>
-            </div>
-        )
+        notFound()
     }
 
     const { users, totalCount } = data

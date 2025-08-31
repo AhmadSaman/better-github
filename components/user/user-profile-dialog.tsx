@@ -83,9 +83,11 @@ export function UserProfileDialog() {
                 </Button>
             </DialogTrigger>
 
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="max-w-[95vw] sm:max-w-md">
                 <DialogHeader>
-                    <DialogTitle>Profile</DialogTitle>
+                    <DialogTitle className="text-base sm:text-lg">
+                        Profile
+                    </DialogTitle>
                 </DialogHeader>
 
                 {isLoading ? (
@@ -94,15 +96,15 @@ export function UserProfileDialog() {
                     </div>
                 ) : userInfo ? (
                     <div className="space-y-4">
-                        <div className="flex items-center space-x-4">
-                            <Avatar className="h-16 w-16">
+                        <div className="flex flex-col space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4">
+                            <Avatar className="mx-auto h-16 w-16 sm:mx-0">
                                 <AvatarImage
                                     src={userInfo.avatarUrl}
                                     alt={userInfo.name || userInfo.username}
                                 />
                                 <AvatarFallback />
                             </Avatar>
-                            <div className="flex-1">
+                            <div className="flex-1 text-center sm:text-left">
                                 <h3 className="text-lg font-semibold">
                                     {userInfo.name || userInfo.username}
                                 </h3>
@@ -118,17 +120,17 @@ export function UserProfileDialog() {
                         </div>
 
                         <Separator />
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
                             <Card>
                                 <CardHeader className="pb-2">
-                                    <CardTitle className="text-muted-foreground text-sm font-medium">
+                                    <CardTitle className="text-muted-foreground text-xs font-medium sm:text-sm">
                                         Repositories
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="flex items-center space-x-2">
+                                    <div className="flex items-center justify-center space-x-2 sm:justify-start">
                                         <GitBranch className="text-muted-foreground h-4 w-4" />
-                                        <span className="text-2xl font-bold">
+                                        <span className="text-xl font-bold sm:text-2xl">
                                             {userInfo.publicRepos}
                                         </span>
                                     </div>
@@ -136,14 +138,14 @@ export function UserProfileDialog() {
                             </Card>
                             <Card>
                                 <CardHeader className="pb-2">
-                                    <CardTitle className="text-muted-foreground text-sm font-medium">
+                                    <CardTitle className="text-muted-foreground text-xs font-medium sm:text-sm">
                                         Followers
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="flex items-center space-x-2">
+                                    <div className="flex items-center justify-center space-x-2 sm:justify-start">
                                         <Users className="text-muted-foreground h-4 w-4" />
-                                        <span className="text-2xl font-bold">
+                                        <span className="text-xl font-bold sm:text-2xl">
                                             {userInfo.followers}
                                         </span>
                                     </div>
@@ -151,14 +153,14 @@ export function UserProfileDialog() {
                             </Card>
                             <Card>
                                 <CardHeader className="pb-2">
-                                    <CardTitle className="text-muted-foreground text-sm font-medium">
+                                    <CardTitle className="text-muted-foreground text-xs font-medium sm:text-sm">
                                         Following
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="flex items-center space-x-2">
+                                    <div className="flex items-center justify-center space-x-2 sm:justify-start">
                                         <Users className="text-muted-foreground h-4 w-4" />
-                                        <span className="text-2xl font-bold">
+                                        <span className="text-xl font-bold sm:text-2xl">
                                             {userInfo.following}
                                         </span>
                                     </div>
@@ -169,25 +171,31 @@ export function UserProfileDialog() {
                         <div className="space-y-3">
                             {userInfo.email && (
                                 <div className="flex items-center space-x-3 text-sm">
-                                    <Mail className="text-muted-foreground h-4 w-4" />
-                                    <span>{userInfo.email}</span>
+                                    <Mail className="text-muted-foreground h-4 w-4 flex-shrink-0" />
+                                    <span className="break-all">
+                                        {userInfo.email}
+                                    </span>
                                 </div>
                             )}
                             {userInfo.location && (
                                 <div className="flex items-center space-x-3 text-sm">
-                                    <MapPin className="text-muted-foreground h-4 w-4" />
-                                    <span>{userInfo.location}</span>
+                                    <MapPin className="text-muted-foreground h-4 w-4 flex-shrink-0" />
+                                    <span className="break-words">
+                                        {userInfo.location}
+                                    </span>
                                 </div>
                             )}
                             {userInfo.company && (
                                 <div className="flex items-center space-x-3 text-sm">
-                                    <Users className="text-muted-foreground h-4 w-4" />
-                                    <span>{userInfo.company}</span>
+                                    <Users className="text-muted-foreground h-4 w-4 flex-shrink-0" />
+                                    <span className="break-words">
+                                        {userInfo.company}
+                                    </span>
                                 </div>
                             )}
                             {userInfo.blog && (
                                 <div className="flex items-center space-x-3 text-sm">
-                                    <LinkIcon className="text-muted-foreground h-4 w-4" />
+                                    <LinkIcon className="text-muted-foreground h-4 w-4 flex-shrink-0" />
                                     <a
                                         href={
                                             userInfo.blog.startsWith('http')
@@ -196,15 +204,15 @@ export function UserProfileDialog() {
                                         }
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-primary hover:underline"
+                                        className="text-primary break-all hover:underline"
                                     >
                                         {userInfo.blog}
                                     </a>
                                 </div>
                             )}
                             <div className="flex items-center space-x-3 text-sm">
-                                <Calendar className="text-muted-foreground h-4 w-4" />
-                                <span>
+                                <Calendar className="text-muted-foreground h-4 w-4 flex-shrink-0" />
+                                <span className="break-words">
                                     Joined{' '}
                                     {format(
                                         new Date(userInfo.joined),
@@ -214,7 +222,7 @@ export function UserProfileDialog() {
                             </div>
                         </div>
 
-                        <div className="flex w-full space-x-2">
+                        <div className="flex w-full space-x-2 pt-2">
                             <Button
                                 asChild
                                 size="sm"

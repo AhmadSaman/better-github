@@ -6,6 +6,7 @@ import { Skeleton } from '../ui/skeleton'
 import { getUsers } from '@/app/users/actions'
 import { UserFilterParams } from '@/types/users'
 import { useCallback } from 'react'
+import { notFound } from 'next/navigation'
 
 const UsersList = ({
     users,
@@ -43,29 +44,27 @@ const UsersList = ({
         fetchFunction,
     })
 
+    if (data.length <= 0) {
+        notFound()
+    }
+
     return (
         <section className="flex w-full flex-col gap-1">
-            {data.length > 0 ? (
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
-                    {data.map((user) => (
-                        <UserCard
-                            key={user.name}
-                            name={user.name}
-                            avatarUrl={user.avatarUrl}
-                        />
-                    ))}
-                    {hasMore && (
-                        <Skeleton
-                            ref={ref}
-                            className="col-span-1 h-full w-full"
-                        ></Skeleton>
-                    )}
-                </div>
-            ) : (
-                <div className="h-full">
-                    <p className="text-center font-semibold">No result Found</p>
-                </div>
-            )}
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+                {data.map((user) => (
+                    <UserCard
+                        key={user.name}
+                        name={user.name}
+                        avatarUrl={user.avatarUrl}
+                    />
+                ))}
+                {hasMore && (
+                    <Skeleton
+                        ref={ref}
+                        className="col-span-1 h-full w-full"
+                    ></Skeleton>
+                )}
+            </div>
 
             <ScrollToTop />
         </section>

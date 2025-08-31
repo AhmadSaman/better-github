@@ -12,7 +12,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { UserProfileDialog } from '@/components/user-profile-dialog'
+import { UserProfileDialog } from '@/components/user/user-profile-dialog'
 
 const setCookie = (name: string, value: string) => {
     if (typeof document === 'undefined') return
