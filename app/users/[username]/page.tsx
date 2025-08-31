@@ -10,6 +10,7 @@ import Link from 'next/link'
 import UserTabs from '@/components/user/user-tabs'
 import UserBadges from '@/components/user/user-badges'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 
 interface PageProps {
     params: {
@@ -98,4 +99,28 @@ export default async function Page({ params }: PageProps) {
             </div>
         </section>
     )
+}
+
+export async function generateMetadata({
+    params,
+}: PageProps): Promise<Metadata> {
+    const { username } = await params
+    const userInfo = await getUser({ username })
+
+    if (!userInfo) {
+        return {
+            title: 'User Not Found',
+            description: 'The requested user could not be found.',
+        }
+    }
+
+    const title = `${userInfo.name || userInfo.username} (@${userInfo.username}) - GitHub Profile`
+    const description = userInfo.bio
+        ? `${userInfo.bio} - ${userInfo.publicRepos} public repositories, ${userInfo.followers} followers`
+        : `${userInfo.name || userInfo.username} on GitHub - ${userInfo.publicRepos} public repositories, ${userInfo.followers} followers`
+
+    return {
+        title,
+        description,
+    }
 }
