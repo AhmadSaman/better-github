@@ -86,17 +86,49 @@ export async function getGithubUserStarredRepositories({
     } satisfies { repos: Repository[] }
 }
 
-export async function getGithubRepositories({
+export async function getRepositories({
     search,
+    username,
+    min_stars,
+    max_stars,
+    languages,
     page = 1,
 }: {
     search: string
+    username?: string
+    min_stars?: string
+    max_stars?: string
+    languages?: string
     page?: number
 }) {
+    let query = search
+
+    if (username) {
+        query += ` user:${username}`
+    }
+
+    if (min_stars || max_stars) {
+        if (min_stars && max_stars) {
+            query += ` stars:${min_stars}..${max_stars}`
+        } else if (min_stars) {
+            query += ` stars:>=${min_stars}`
+        } else if (max_stars) {
+            query += ` stars:<=${max_stars}`
+        }
+    }
+
+    if (languages) {
+        const languageList = languages.split(',').map((lang) => lang.trim())
+        languageList.forEach((lang) => {
+            query += ` language:${lang}`
+        })
+    }
+
     const searchParams = new URLSearchParams({
-        q: `${search}`,
+        q: query.trim(),
         page: page.toString(),
     })
+
     const response = await fetch(buildUrl('/api/repositories', searchParams), {
         headers: getHeaders(),
         cache: 'force-cache',
