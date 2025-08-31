@@ -121,8 +121,8 @@ export function UserProfileDialog() {
                         </div>
 
                         <Separator />
-                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
-                            <Card>
+                        <div className="flex flex-wrap justify-center gap-3">
+                            <Card className="flex-1">
                                 <CardHeader className="pb-2">
                                     <CardTitle className="text-muted-foreground text-xs font-medium sm:text-sm">
                                         Repositories
@@ -137,7 +137,7 @@ export function UserProfileDialog() {
                                     </div>
                                 </CardContent>
                             </Card>
-                            <Card>
+                            <Card className="flex-1">
                                 <CardHeader className="pb-2">
                                     <CardTitle className="text-muted-foreground text-xs font-medium sm:text-sm">
                                         Followers
@@ -152,7 +152,7 @@ export function UserProfileDialog() {
                                     </div>
                                 </CardContent>
                             </Card>
-                            <Card>
+                            <Card className="flex-1">
                                 <CardHeader className="pb-2">
                                     <CardTitle className="text-muted-foreground text-xs font-medium sm:text-sm">
                                         Following
