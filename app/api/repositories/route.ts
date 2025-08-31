@@ -1,4 +1,5 @@
 import { octokit } from '@/config/octokit'
+import { PER_PAGE } from '@/constants/general'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
@@ -9,7 +10,7 @@ export async function GET(request: NextRequest) {
     const response = await octokit.rest.search.repos({
         q: query || '',
         page,
-        per_page: 30,
+        per_page: PER_PAGE,
     })
 
     return NextResponse.json(response)

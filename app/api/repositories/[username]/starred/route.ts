@@ -1,4 +1,5 @@
 import { octokit } from '@/config/octokit'
+import { PER_PAGE } from '@/constants/general'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
@@ -12,7 +13,7 @@ export async function GET(
     const response = await octokit.rest.activity.listReposStarredByUser({
         username: username,
         page,
-        per_page: 25,
+        per_page: PER_PAGE,
     })
     return NextResponse.json(response)
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import { PER_PAGE } from '@/constants/general'
 import { useCallback, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
@@ -22,7 +23,7 @@ export default function useInfiniteScroll<T>({
         setIsLoading(true)
         try {
             const resData = await fetchFunction(next)
-            if (resData?.length && resData.length === 25) {
+            if (resData?.length && resData.length === PER_PAGE) {
                 setPage(next)
                 setData((prev: T[]) => [
                     ...(prev?.length ? prev : []),
