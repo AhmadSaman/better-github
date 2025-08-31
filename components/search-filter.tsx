@@ -1,13 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
 
-const SearchFilter = () => {
+const SearchFilter = ({ children }: { children: ReactNode }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
 
@@ -33,8 +31,8 @@ const SearchFilter = () => {
     }
 
     return (
-        <section className="flex flex-col gap-2">
-            <div className="sticky top-0 flex gap-2">
+        <section className="flex flex-col">
+            <div className="flex gap-2">
                 <Input
                     className="w-full"
                     placeholder="Search for Github Users"
@@ -45,14 +43,8 @@ const SearchFilter = () => {
                 <Button onClick={handleSearch}>Search</Button>
             </div>
             <div>
-                <div className="flex items-center space-x-1">
-                    <Switch id="airplane-mode" className="scale-90" />
-                    <Label
-                        htmlFor="advanced-mode"
-                        className="text-xs text-gray-500"
-                    >
-                        Advanced Mode
-                    </Label>
+                <div className="bg-card mt-4 space-y-4 rounded-lg border p-4">
+                    {children}
                 </div>
             </div>
         </section>

@@ -4,7 +4,7 @@ import { Repository } from '@/types/repository'
 import ScrollToTop from '../scroll-to-top'
 import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
-import { getGithubRepositories } from '@/app/repositories/actions'
+import { getRepositories } from '@/app/repositories/actions'
 
 interface RepositoriesListProps {
     repositories: Repository[]
@@ -20,7 +20,7 @@ export default function RepositoriesList({
     const { data, ref, hasMore } = useInfiniteScroll<Repository>({
         initialData: repositories,
         fetchFunction: async (page: number) => {
-            const response = await getGithubRepositories({ search, page })
+            const response = await getRepositories({ search, page })
             return response?.repos || []
         },
     })
