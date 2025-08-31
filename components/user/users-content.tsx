@@ -1,7 +1,7 @@
 import { getUsers } from '@/app/users/actions'
 import { Users } from 'lucide-react'
 import UsersList from './users-list'
-import { userFilterParams } from '@/types/users'
+import { UserFilterParams } from '@/types/users'
 
 export default async function UsersContent({
     search,
@@ -10,7 +10,7 @@ export default async function UsersContent({
     max_followers,
     min_repos,
     max_repos,
-}: userFilterParams) {
+}: UserFilterParams) {
     const data = await getUsers({
         search,
         page: 1,

@@ -11,16 +11,20 @@ import UserTabs from '@/components/user/user-tabs'
 import UserBadges from '@/components/user/user-badges'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import { UserFilterParams } from '@/types/users'
 
 interface PageProps {
     params: {
         username: string
     }
+    searchParams: UserFilterParams
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: PageProps) {
     const { username } = await params
+    const sp = await searchParams
     const userInfo = await getUser({ username })
+    const generateParams = new URLSearchParams({ ...sp })
 
     if (!userInfo) {
         return notFound()
@@ -34,7 +38,7 @@ export default async function Page({ params }: PageProps) {
                 variant={'outline'}
                 asChild
             >
-                <Link href="/users">
+                <Link href={`/users?${generateParams.toString()}`}>
                     <ArrowLeft />
                 </Link>
             </Button>
@@ -103,7 +107,9 @@ export default async function Page({ params }: PageProps) {
 
 export async function generateMetadata({
     params,
-}: PageProps): Promise<Metadata> {
+}: {
+    params: { username: string }
+}): Promise<Metadata> {
     const { username } = await params
     const userInfo = await getUser({ username })
 

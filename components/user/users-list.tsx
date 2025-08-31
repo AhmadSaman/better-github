@@ -4,7 +4,7 @@ import ScrollToTop from '../scroll-to-top'
 import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
 import { getUsers } from '@/app/users/actions'
-import { userFilterParams } from '@/types/users'
+import { UserFilterParams } from '@/types/users'
 
 const UsersList = ({
     users,
@@ -16,7 +16,7 @@ const UsersList = ({
     max_repos,
 }: {
     users: { name: string; avatarUrl: string }[]
-} & userFilterParams) => {
+} & UserFilterParams) => {
     const { data, ref, hasMore } = useInfiniteScroll<{
         name: string
         avatarUrl: string

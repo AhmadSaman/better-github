@@ -1,4 +1,4 @@
-export interface userFilterParams {
+export interface UserFilterParams {
     search: string
     location?: string
     min_followers?: string
