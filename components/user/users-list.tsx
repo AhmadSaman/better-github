@@ -5,6 +5,7 @@ import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
 import { getUsers } from '@/app/users/actions'
 import { UserFilterParams } from '@/types/users'
+import { useCallback } from 'react'
 
 const UsersList = ({
     users,
@@ -17,12 +18,8 @@ const UsersList = ({
 }: {
     users: { name: string; avatarUrl: string }[]
 } & UserFilterParams) => {
-    const { data, ref, hasMore } = useInfiniteScroll<{
-        name: string
-        avatarUrl: string
-    }>({
-        initialData: users,
-        fetchFunction: async (page: number) => {
+    const fetchFunction = useCallback(
+        async (page: number) => {
             const response = await getUsers({
                 search,
                 page,
@@ -35,6 +32,15 @@ const UsersList = ({
 
             return response?.users || []
         },
+        [search, location, min_followers, max_followers, min_repos, max_repos]
+    )
+
+    const { data, ref, hasMore } = useInfiniteScroll<{
+        name: string
+        avatarUrl: string
+    }>({
+        initialData: users,
+        fetchFunction,
     })
 
     return (

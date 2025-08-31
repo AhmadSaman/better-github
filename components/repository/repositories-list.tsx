@@ -4,6 +4,7 @@ import { Repository } from '@/types/repository'
 import ScrollToTop from '../scroll-to-top'
 import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
+import { useCallback } from 'react'
 
 import { getRepositories } from '@/app/repositories/actions'
 import {
@@ -26,9 +27,8 @@ export default function RepositoriesList({
     type = 'public',
     className = 'grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
 }: RepositoriesListProps) {
-    const { data, ref, hasMore } = useInfiniteScroll<Repository>({
-        initialData: repositories,
-        fetchFunction: async (page: number) => {
+    const fetchFunction = useCallback(
+        async (page: number) => {
             if (type === 'public') {
                 const response = await getRepositories({
                     search: params.search || '',
@@ -55,6 +55,12 @@ export default function RepositoriesList({
             })
             return response?.repos || []
         },
+        [type, params]
+    )
+
+    const { data, ref, hasMore } = useInfiniteScroll<Repository>({
+        initialData: repositories,
+        fetchFunction,
     })
 
     return (
