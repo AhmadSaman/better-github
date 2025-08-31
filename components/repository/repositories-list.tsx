@@ -24,7 +24,7 @@ export default function RepositoriesList({
     repositories,
     params,
     type = 'public',
-    className = 'grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3',
+    className = 'grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
 }: RepositoriesListProps) {
     const { data, ref, hasMore } = useInfiniteScroll<Repository>({
         initialData: repositories,
@@ -58,7 +58,7 @@ export default function RepositoriesList({
     })
 
     return (
-        <section className="flex flex-col gap-1">
+        <section className="flex w-full flex-col gap-1">
             {data.length > 0 ? (
                 <div className={className}>
                     {data.map((repository, index) => (

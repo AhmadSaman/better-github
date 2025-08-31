@@ -6,7 +6,7 @@ import RepositoriesListSkeleton from '@/components/repository/repositories-list-
 
 export default function Loading() {
     return (
-        <section className="container m-4 mx-auto rounded-xl p-8">
+        <section className="container m-4 mx-auto w-full rounded-xl p-8">
             <Button
                 size={'icon'}
                 className="rounded-full transition-all duration-200 hover:scale-105"
@@ -60,7 +60,7 @@ export default function Loading() {
                         <Skeleton className="size-16" />
                         <Skeleton className="size-16" />
                     </div>
-                    <div className="flex justify-center">
+                    <div className="w-full">
                         <RepositoriesListSkeleton />
                     </div>
                 </div>

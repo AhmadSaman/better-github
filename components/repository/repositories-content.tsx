@@ -37,9 +37,8 @@ export default async function RepositoriesContent({
                 <Warehouse size={14} />
                 <span className="font-semibold">{totalCount}</span>
             </div>
-            <div className="mx-auto lg:mx-0">
+            <div className="mx-auto w-full lg:mx-0">
                 <RepositoriesList
-                    className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
                     repositories={repos}
                     params={{
                         search,

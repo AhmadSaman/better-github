@@ -19,7 +19,7 @@ export default async function Page({
             key={`${search}-${username || ''}-${min_stars || ''}-${max_stars || ''}-${languages || ''}`}
             fallback={
                 <SkeletonWrapper>
-                    <RepositoriesListSkeleton className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4" />
+                    <RepositoriesListSkeleton />
                 </SkeletonWrapper>
             }
         >

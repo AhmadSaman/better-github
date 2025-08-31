@@ -33,11 +33,11 @@ export default function UserTabs({ username }: { username: string }) {
                     Starred
                 </TabsTrigger>
             </TabsList>
-            <TabsContent value="repositories">
+            <TabsContent value="repositories" className="w-full">
                 <UserRepositories username={username} type="public" />
             </TabsContent>
 
-            <TabsContent value="starred">
+            <TabsContent value="starred" className="w-full">
                 <UserRepositories username={username} type="starred" />
             </TabsContent>
         </Tabs>

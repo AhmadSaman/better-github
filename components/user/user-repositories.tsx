@@ -8,17 +8,17 @@ import RepositoriesList from '../repository/repositories-list'
 
 type RepositoryType = 'public' | 'starred'
 
-interface UserRepositoriesUnifiedProps {
+interface UserRepositoriesProps {
     username: string
     type: RepositoryType
 }
 
-export default function UserRepositoriesUnified({
+export default function UserRepositories({
     username,
     type,
-}: UserRepositoriesUnifiedProps) {
+}: UserRepositoriesProps) {
     return (
-        <div className="p-3">
+        <div className="w-full p-3">
             <Suspense
                 key={`${username}-${type}`}
                 fallback={<RepositoriesListSkeleton />}
