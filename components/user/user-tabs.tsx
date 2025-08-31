@@ -1,7 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Star, Warehouse } from 'lucide-react'
 import UserRepositories from './user-repositories'
-import UserStarredRepositories from './user-starred-repositories'
 
 export default function UserTabs({ username }: { username: string }) {
     return (
@@ -35,11 +34,11 @@ export default function UserTabs({ username }: { username: string }) {
                 </TabsTrigger>
             </TabsList>
             <TabsContent value="repositories">
-                <UserRepositories username={username} />
+                <UserRepositories username={username} type="public" />
             </TabsContent>
 
             <TabsContent value="starred">
-                <UserStarredRepositories username={username} />
+                <UserRepositories username={username} type="starred" />
             </TabsContent>
         </Tabs>
     )

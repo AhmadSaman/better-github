@@ -1,24 +1,49 @@
 import { Suspense } from 'react'
 import RepositoriesListSkeleton from '../repository/repositories-list-skeleton'
-import { getUserRepositories } from '@/app/users/[username]/actions'
+import {
+    getUserRepositories,
+    getUserStarredRepositories,
+} from '@/app/users/[username]/actions'
 import RepositoriesList from '../repository/repositories-list'
 
-export default async function UserRepositories({
-    username,
-}: {
+type RepositoryType = 'public' | 'starred'
+
+interface UserRepositoriesUnifiedProps {
     username: string
-}) {
+    type: RepositoryType
+}
+
+export default function UserRepositoriesUnified({
+    username,
+    type,
+}: UserRepositoriesUnifiedProps) {
     return (
         <div className="p-3">
-            <Suspense key={username} fallback={<RepositoriesListSkeleton />}>
-                <RepositoriesListContent username={username} />
+            <Suspense
+                key={`${username}-${type}`}
+                fallback={<RepositoriesListSkeleton />}
+            >
+                <RepositoriesListContent username={username} type={type} />
             </Suspense>
         </div>
     )
 }
 
-async function RepositoriesListContent({ username }: { username: string }) {
-    const data = await getUserRepositories({ username })
+async function RepositoriesListContent({
+    username,
+    type,
+}: {
+    username: string
+    type: RepositoryType
+}) {
+    let data
+
+    if (type === 'starred') {
+        data = await getUserStarredRepositories({ username })
+    } else {
+        data = await getUserRepositories({ username })
+    }
+
     if (!data) {
         return (
             <div className="p-3">
@@ -30,10 +55,11 @@ async function RepositoriesListContent({ username }: { username: string }) {
     }
 
     const { repos } = data
+    const listType = type === 'starred' ? 'user-starred' : 'user-public'
 
     return (
         <RepositoriesList
-            type="user-public"
+            type={listType}
             params={{ username }}
             repositories={repos}
         />
