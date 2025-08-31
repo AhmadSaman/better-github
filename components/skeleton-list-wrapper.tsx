@@ -12,7 +12,7 @@ export default function SkeletonWrapper({
 }: SkeletonWrapperProps) {
     return (
         <section className="flex flex-col gap-1">
-            <div className="mx-1 flex items-center gap-1 text-xs font-medium text-gray-400">
+            <div className="text-muted-foreground mx-1 flex items-center gap-1 text-xs font-medium">
                 <Skeleton className="h-4 w-15" />
             </div>
             <div className={className}>{children}</div>

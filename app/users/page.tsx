@@ -60,12 +60,12 @@ export default async function Page({
                     </Suspense>
                 ) : (
                     <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-                        <Users size={64} className="text-gray-300" />
+                        <Users size={64} className="text-muted-foreground" />
                         <div className="space-y-2">
-                            <h2 className="text-xl font-semibold text-gray-700">
+                            <h2 className="text-muted-foreground text-xl font-semibold">
                                 No search criteria
                             </h2>
-                            <p className="max-w-md text-gray-500">
+                            <p className="text-muted-foreground max-w-md">
                                 Use the search bar above to find users by name,
                                 location, following, followers, repositories.
                             </p>

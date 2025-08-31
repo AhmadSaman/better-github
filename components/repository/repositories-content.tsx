@@ -33,7 +33,7 @@ export default async function RepositoriesContent({
 
     return (
         <section className="flex flex-col gap-1">
-            <div className="mx-1 flex items-center gap-1 text-xs font-medium text-gray-400">
+            <div className="text-muted-foreground mx-1 flex items-center gap-1 text-xs font-medium">
                 <Warehouse size={14} />
                 <span className="font-semibold">{totalCount}</span>
             </div>
