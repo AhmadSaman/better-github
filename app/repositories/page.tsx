@@ -112,13 +112,15 @@ async function RepositoriesListContent({
             </div>
             <div className="mx-auto lg:mx-0">
                 <RepositoriesList
-                    search={search}
                     className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
                     repositories={repos}
-                    username={username}
-                    min_stars={min_stars}
-                    max_stars={max_stars}
-                    languages={languages}
+                    params={{
+                        search,
+                        username: username!,
+                        min_stars: min_stars!,
+                        max_stars: max_stars!,
+                        languages: languages!,
+                    }}
                 />
             </div>
         </section>

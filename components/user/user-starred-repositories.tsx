@@ -1,5 +1,5 @@
 import { getUserStarredRepositories } from '@/app/users/[username]/actions'
-import RepositoriesList from '@/components/user/users-repositories-list'
+import RepositoriesList from '../repository/repositories-list'
 
 export default async function UserStarredRepositories({
     username,
@@ -23,9 +23,9 @@ export default async function UserStarredRepositories({
     return (
         <div className="p-3">
             <RepositoriesList
-                type="starred"
+                type="user-starred"
                 repositories={repos}
-                username={username}
+                params={{ username }}
             />
         </div>
     )

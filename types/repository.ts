@@ -15,3 +15,11 @@ export interface Repository {
         avatarUrl?: string
     }
 }
+
+export interface RepositoryFilterParams {
+    search: string
+    username?: string
+    min_stars?: string
+    max_stars?: string
+    languages?: string
+}

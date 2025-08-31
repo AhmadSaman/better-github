@@ -47,7 +47,7 @@ export async function getUserStarredRepositories({
         buildUrl(`/api/repositories/${username}/starred`, searchParams),
         {
             headers: getHeaders(),
-            cache: 'force-cache',
+            cache: 'no-cache',
         }
     )
 
@@ -88,7 +88,7 @@ export async function getUserRepositories({
         buildUrl(`/api/repositories/${username}`, searchParams),
         {
             headers: getHeaders(),
-            cache: 'force-cache',
+            cache: 'no-cache',
         }
     )
 

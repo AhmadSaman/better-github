@@ -4,34 +4,53 @@ import { Repository } from '@/types/repository'
 import ScrollToTop from '../scroll-to-top'
 import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
+
 import { getRepositories } from '@/app/repositories/actions'
+import {
+    getUserRepositories,
+    getUserStarredRepositories,
+} from '@/app/users/[username]/actions'
+
+type RepoType = 'user-starred' | 'user-public' | 'public'
 
 interface RepositoriesListProps {
     repositories: Repository[]
-    search: string
+    type?: RepoType
     className?: string
-    username?: string
-    min_stars?: string
-    max_stars?: string
-    languages?: string
+    params: { [key: string]: string }
 }
 
 export default function RepositoriesList({
     repositories,
-    search,
-    min_stars,
-    max_stars,
-    languages,
+    params,
+    type = 'public',
     className = 'grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3',
 }: RepositoriesListProps) {
     const { data, ref, hasMore } = useInfiniteScroll<Repository>({
         initialData: repositories,
         fetchFunction: async (page: number) => {
-            const response = await getRepositories({
-                search,
-                max_stars,
-                min_stars,
-                languages,
+            if (type === 'public') {
+                const response = await getRepositories({
+                    search: params.search || '',
+                    username: params.username,
+                    min_stars: params.min_stars,
+                    max_stars: params.max_stars,
+                    languages: params.languages,
+                    page,
+                })
+                return response?.repos || []
+            }
+
+            if (!params.username) {
+                throw new Error('Username required for user repositories')
+            }
+
+            const getRepo =
+                type === 'user-public'
+                    ? getUserRepositories
+                    : getUserStarredRepositories
+            const response = await getRepo({
+                username: params.username,
                 page,
             })
             return response?.repos || []

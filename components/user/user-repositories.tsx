@@ -1,7 +1,7 @@
-import RepositoriesList from '@/components/user/users-repositories-list'
 import { Suspense } from 'react'
 import RepositoriesListSkeleton from '../repository/repositories-list-skeleton'
 import { getUserRepositories } from '@/app/users/[username]/actions'
+import RepositoriesList from '../repository/repositories-list'
 
 export default async function UserRepositories({
     username,
@@ -33,8 +33,8 @@ async function RepositoriesListContent({ username }: { username: string }) {
 
     return (
         <RepositoriesList
-            type="public"
-            username={username}
+            type="user-public"
+            params={{ username }}
             repositories={repos}
         />
     )
