@@ -38,7 +38,7 @@ export default async function UsersContent({
                 <Users size={14} />
                 <span className="font-semibold">{totalCount}</span>
             </div>
-            <div className="mx-auto lg:mx-0">
+            <div className="mx-auto w-full lg:mx-0">
                 <UsersList
                     users={users}
                     search={search}

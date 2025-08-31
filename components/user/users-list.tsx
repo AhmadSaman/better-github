@@ -38,16 +38,15 @@ const UsersList = ({
     })
 
     return (
-        <section className="flex flex-col gap-1">
+        <section className="flex w-full flex-col gap-1">
             {data.length > 0 ? (
-                <div className="grid grid-cols-2 justify-center gap-5 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
                     {data.map((user) => (
-                        <div key={user.name}>
-                            <UserCard
-                                name={user.name}
-                                avatarUrl={user.avatarUrl}
-                            />
-                        </div>
+                        <UserCard
+                            key={user.name}
+                            name={user.name}
+                            avatarUrl={user.avatarUrl}
+                        />
                     ))}
                     {hasMore && (
                         <Skeleton
