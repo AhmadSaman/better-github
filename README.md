@@ -60,7 +60,7 @@ exploration..
 
 ## ⚠️ Assumptions
 
-Deployed link is using owners generated github token, to see your personal information use your generated github token.
+Deployed link is using owners generated github token, To see your personal information clone the project and use your generated github token.
 
 ## 👽 Features
 
