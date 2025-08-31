@@ -123,7 +123,6 @@ export async function getRepositories({
             query += ` language:${lang}`
         })
     }
-
     const searchParams = new URLSearchParams({
         q: query.trim(),
         page: page.toString(),
@@ -131,7 +130,7 @@ export async function getRepositories({
 
     const response = await fetch(buildUrl('/api/repositories', searchParams), {
         headers: getHeaders(),
-        cache: 'force-cache',
+        cache: 'no-cache',
     })
 
     if (!response.ok) {
@@ -139,7 +138,6 @@ export async function getRepositories({
         return null
     }
     const { data }: OctokitRepositoriesType = await response.json()
-
     return {
         totalCount: data.total_count,
         repos: data.items.map((repo) => ({

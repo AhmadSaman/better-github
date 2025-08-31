@@ -10,17 +10,30 @@ interface RepositoriesListProps {
     repositories: Repository[]
     search: string
     className?: string
+    username?: string
+    min_stars?: string
+    max_stars?: string
+    languages?: string
 }
 
 export default function RepositoriesList({
     repositories,
     search,
+    min_stars,
+    max_stars,
+    languages,
     className = 'grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3',
 }: RepositoriesListProps) {
     const { data, ref, hasMore } = useInfiniteScroll<Repository>({
         initialData: repositories,
         fetchFunction: async (page: number) => {
-            const response = await getRepositories({ search, page })
+            const response = await getRepositories({
+                search,
+                max_stars,
+                min_stars,
+                languages,
+                page,
+            })
             return response?.repos || []
         },
     })

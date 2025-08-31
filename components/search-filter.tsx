@@ -5,7 +5,13 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useSearchParams, useRouter } from 'next/navigation'
 
-const SearchFilter = ({ children }: { children: ReactNode }) => {
+const SearchFilter = ({
+    children,
+    placeholder = 'Search...',
+}: {
+    children: ReactNode
+    placeholder?: string
+}) => {
     const searchParams = useSearchParams()
     const router = useRouter()
 
@@ -35,18 +41,20 @@ const SearchFilter = ({ children }: { children: ReactNode }) => {
             <div className="flex gap-2">
                 <Input
                     className="w-full"
-                    placeholder="Search for Github Users"
+                    placeholder={placeholder}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                     onKeyDown={handleKeyDown}
                 />
                 <Button onClick={handleSearch}>Search</Button>
             </div>
-            <div>
-                <div className="bg-card mt-4 space-y-4 rounded-lg border p-4">
-                    {children}
+            {children && (
+                <div>
+                    <div className="bg-card mt-4 space-y-4 rounded-lg border p-4">
+                        {children}
+                    </div>
                 </div>
-            </div>
+            )}
         </section>
     )
 }

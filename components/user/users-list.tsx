@@ -4,16 +4,26 @@ import { Users } from 'lucide-react'
 import ScrollToTop from '../scroll-to-top'
 import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
-import { getGitHubUsers } from '@/app/users/actions'
+import { getUsers } from '@/app/users/actions'
 
 const UserList = ({
     users,
     total,
     search,
+    location,
+    min_followers,
+    max_followers,
+    min_repos,
+    max_repos,
 }: {
     users: { name: string; avatarUrl: string }[]
     total: number
     search: string
+    location?: string
+    min_followers?: string
+    max_followers?: string
+    min_repos?: string
+    max_repos?: string
 }) => {
     const { data, ref, hasMore } = useInfiniteScroll<{
         name: string
@@ -21,7 +31,15 @@ const UserList = ({
     }>({
         initialData: users,
         fetchFunction: async (page: number) => {
-            const response = await getGitHubUsers({ search, page })
+            const response = await getUsers({
+                search,
+                page,
+                location,
+                min_followers,
+                max_followers,
+                min_repos,
+                max_repos,
+            })
 
             return response?.users || []
         },

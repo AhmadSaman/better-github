@@ -296,7 +296,7 @@ const RepositoryAdvancedFilters = () => {
                             variant="outline"
                             size="sm"
                             onClick={handleClearAll}
-                            className="ml-auto flex h-full items-center gap-2"
+                            className="ml-auto flex h-full items-center gap-2 text-xs"
                         >
                             <X size={16} />
                             Clear All

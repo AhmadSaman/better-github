@@ -28,7 +28,7 @@ export default async function Page({
                     <Warehouse size={24} />
                     <h1 className="text-2xl font-bold">Repositories</h1>
                 </div>
-                <SearchFilter>
+                <SearchFilter placeholder="Search for GitHub repositories by name, or other criteria">
                     <RepositoryAdvancedFilters />
                 </SearchFilter>
             </div>
@@ -115,6 +115,10 @@ async function RepositoriesListContent({
                     search={search}
                     className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
                     repositories={repos}
+                    username={username}
+                    min_stars={min_stars}
+                    max_stars={max_stars}
+                    languages={languages}
                 />
             </div>
         </section>

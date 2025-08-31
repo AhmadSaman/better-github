@@ -22,8 +22,7 @@ export default function useInfiniteScroll<T>({
         setIsLoading(true)
         try {
             const resData = await fetchFunction(next)
-            console.log(resData)
-            if (resData?.length) {
+            if (resData?.length && resData.length === 25) {
                 setPage(next)
                 setData((prev: T[]) => [
                     ...(prev?.length ? prev : []),
