@@ -1,6 +1,6 @@
 'use client'
 
-import { Moon, Sun, Users, Warehouse } from 'lucide-react'
+import { Home, Moon, Sun, Users, Warehouse } from 'lucide-react'
 import { Dock, DockIcon } from '@/components/ui/dock'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -62,6 +62,23 @@ function NavDock() {
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <Button
+                            variant={isActiveRoute('/') ? 'default' : 'ghost'}
+                            asChild
+                        >
+                            <Link href="/">
+                                <Home size={16} />
+                            </Link>
+                        </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Home</p>
+                    </TooltipContent>
+                </Tooltip>
+            </DockIcon>
+            <DockIcon>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Button
                             variant={
                                 isActiveRoute('/repositories')
                                     ? 'default'
@@ -105,14 +122,7 @@ function NavDock() {
                 </Button>
             </DockIcon>
             <DockIcon>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <UserProfileDialog />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>Profile</p>
-                    </TooltipContent>
-                </Tooltip>
+                <UserProfileDialog />
             </DockIcon>
         </Dock>
     )
