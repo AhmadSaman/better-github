@@ -12,6 +12,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { UserProfileDialog } from '@/components/user-profile-dialog'
 
 const setCookie = (name: string, value: string) => {
     if (typeof document === 'undefined') return
@@ -102,6 +103,16 @@ function NavDock() {
                 <Button variant={'ghost'} onClick={toggleDarkMode}>
                     {isDark ? <Sun size={16} /> : <Moon size={16} />}
                 </Button>
+            </DockIcon>
+            <DockIcon>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <UserProfileDialog />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Profile</p>
+                    </TooltipContent>
+                </Tooltip>
             </DockIcon>
         </Dock>
     )
