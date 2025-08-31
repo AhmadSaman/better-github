@@ -1,11 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-import { fetchGitHubUser } from '@/lib/github'
 import { ArrowLeft } from 'lucide-react'
 
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
 
+import { getUser } from './actions'
 import Link from 'next/link'
 import UserTabs from '@/components/user/user-tabs'
 import UserBadges from '@/components/user/user-badges'
@@ -19,7 +19,7 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
     const { username } = await params
-    const userInfo = await fetchGitHubUser({ username })
+    const userInfo = await getUser({ username })
 
     if (!userInfo) {
         return notFound()

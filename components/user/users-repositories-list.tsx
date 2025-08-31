@@ -4,11 +4,12 @@ import { Repository } from '@/types/repository'
 import ScrollToTop from '../scroll-to-top'
 import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
-import {
-    getGithubUserRepositories,
-    getGithubUserStarredRepositories,
-} from '@/app/repositories/actions'
+
 import RepositoryCard from '../repository/repository-card'
+import {
+    getUserRepositories,
+    getUserStarredRepositories,
+} from '@/app/users/[username]/actions'
 
 interface RepositoriesListProps {
     repositories: Repository[]
@@ -28,8 +29,8 @@ export default function RepositoriesList({
         fetchFunction: async (page: number) => {
             const getRepoFunction =
                 type === 'public'
-                    ? getGithubUserRepositories
-                    : getGithubUserStarredRepositories
+                    ? getUserRepositories
+                    : getUserStarredRepositories
             const response = await getRepoFunction({ username, page })
             return response?.repos || []
         },

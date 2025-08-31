@@ -1,4 +1,4 @@
-import { octokit } from '@/config'
+import { octokit } from '@/config/octokit'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(

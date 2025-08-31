@@ -1,7 +1,7 @@
 'use server'
 
-import { OctokitUsersType } from '@/config'
-import { buildUrl, getHeaders } from '@/lib/github'
+import { buildUrl, getHeaders } from '@/config/url'
+import { OctokitUsersType } from '@/types/github'
 
 export async function getUsers({
     search,

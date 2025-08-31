@@ -1,12 +1,12 @@
+import { getUserStarredRepositories } from '@/app/users/[username]/actions'
 import RepositoriesList from '@/components/user/users-repositories-list'
-import { getGithubUserStarredRepositories } from '@/app/repositories/actions'
 
 export default async function UserStarredRepositories({
     username,
 }: {
     username: string
 }) {
-    const data = await getGithubUserStarredRepositories({ username })
+    const data = await getUserStarredRepositories({ username })
 
     if (!data) {
         return (

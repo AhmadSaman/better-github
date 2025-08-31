@@ -1,7 +1,7 @@
 import RepositoriesList from '@/components/user/users-repositories-list'
 import { Suspense } from 'react'
 import RepositoriesListSkeleton from '../repository/repositories-list-skeleton'
-import { getGithubUserRepositories } from '@/app/repositories/actions'
+import { getUserRepositories } from '@/app/users/[username]/actions'
 
 export default async function UserRepositories({
     username,
@@ -18,7 +18,7 @@ export default async function UserRepositories({
 }
 
 async function RepositoriesListContent({ username }: { username: string }) {
-    const data = await getGithubUserRepositories({ username })
+    const data = await getUserRepositories({ username })
     if (!data) {
         return (
             <div className="p-3">
