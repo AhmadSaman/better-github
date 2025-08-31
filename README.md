@@ -24,8 +24,8 @@ exploration..
 1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/your-username/project-name.git
-    cd project-name
+    git git@github.com:AhmadSaman/better-github.git
+    cd better-github
     ```
 
 2. **Add necessary environment variables**
