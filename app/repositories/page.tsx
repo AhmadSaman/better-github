@@ -2,7 +2,7 @@ import RepositoriesList from '@/components/repository/repositories-list'
 import { Warehouse } from 'lucide-react'
 import { Suspense } from 'react'
 import RepositoriesListSkeleton from '@/components/repository/repositories-list-skeleton'
-import { Skeleton } from '@/components/ui/skeleton'
+import SkeletonWrapper from '@/components/skeleton-list-wrapper'
 import SearchFilter from '@/components/search-filter'
 import { getRepositories } from './actions'
 import RepositoryAdvancedFilters from '@/components/repository/repository-advanced-filters'
@@ -31,13 +31,9 @@ export default async function Page({
                 <Suspense
                     key={`${search}-${username || ''}-${min_stars || ''}-${max_stars || ''}-${languages || ''}`}
                     fallback={
-                        <section className="flex flex-col gap-1">
-                            <div className="mx-1 flex items-center gap-1 text-xs font-medium text-gray-400">
-                                <Warehouse size={14} />
-                                <Skeleton className="h-2.5 w-10" />
-                            </div>
+                        <SkeletonWrapper>
                             <RepositoriesListSkeleton className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4" />
-                        </section>
+                        </SkeletonWrapper>
                     }
                 >
                     <RepositoriesListContent

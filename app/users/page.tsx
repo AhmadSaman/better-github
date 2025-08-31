@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton'
+import SkeletonWrapper from '@/components/skeleton-list-wrapper'
 import SearchFilter from '@/components/search-filter'
 import UsersList from '@/components/user/users-list'
 import UsersListSkeleton from '@/components/user/users-list-skeleton'
@@ -45,15 +45,9 @@ export default async function Page({
                 <Suspense
                     key={`${search}-${location || ''}-${min_followers || ''}-${max_followers || ''}-${min_repos || ''}-${max_repos || ''}`}
                     fallback={
-                        <section className="flex flex-col gap-1">
-                            <div className="mx-1 flex items-center gap-1 text-xs font-medium text-gray-400">
-                                <Users size={14} />
-                                <span>
-                                    <Skeleton className="h-[16px] w-[88px] rounded-xl" />
-                                </span>
-                            </div>
+                        <SkeletonWrapper>
                             <UsersListSkeleton />
-                        </section>
+                        </SkeletonWrapper>
                     }
                 >
                     <UsersListContent
