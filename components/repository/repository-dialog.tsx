@@ -13,10 +13,11 @@ import {
     GitBranch,
     Calendar,
     Github,
-    ExternalLink,
+    ExternalLink as ExternalLinkIcon,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { Repository } from '@/types/repository'
+import { ExternalLink } from '@/components/ui/external-link'
 
 interface RepositoryDialogProps {
     repository: Repository
@@ -170,14 +171,10 @@ export default function RepositoryDialog({
                     <div className="flex gap-3 border-t pt-4">
                         {githubUrl && (
                             <Button asChild className="flex-1 gap-2 rounded-xl">
-                                <a
-                                    href={githubUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
+                                <ExternalLink href={githubUrl} showIcon={false}>
                                     <Github className="h-4 w-4" />
                                     View on GitHub
-                                </a>
+                                </ExternalLink>
                             </Button>
                         )}
                         {link && (
@@ -186,14 +183,10 @@ export default function RepositoryDialog({
                                 variant="outline"
                                 className="flex-1 gap-2 rounded-xl"
                             >
-                                <a
-                                    href={link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <ExternalLink className="h-4 w-4" />
+                                <ExternalLink href={link} showIcon={false}>
+                                    <ExternalLinkIcon className="h-4 w-4" />
                                     Visit Website
-                                </a>
+                                </ExternalLink>
                             </Button>
                         )}
                     </div>

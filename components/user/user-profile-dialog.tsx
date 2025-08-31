@@ -24,6 +24,7 @@ import {
 import { getAuthenticatedUser } from '@/app/user/actions'
 import Link from 'next/link'
 import { format } from 'date-fns'
+import { ExternalLink } from '@/components/ui/external-link'
 
 export function UserProfileDialog() {
     const [userInfo, setUserInfo] = useState<{
@@ -196,18 +197,12 @@ export function UserProfileDialog() {
                             {userInfo.blog && (
                                 <div className="flex items-center space-x-3 text-sm">
                                     <LinkIcon className="text-muted-foreground h-4 w-4 flex-shrink-0" />
-                                    <a
-                                        href={
-                                            userInfo.blog.startsWith('http')
-                                                ? userInfo.blog
-                                                : `https://${userInfo.blog}`
-                                        }
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-primary break-all hover:underline"
+                                    <ExternalLink
+                                        href={userInfo.blog}
+                                        className="break-all"
                                     >
                                         {userInfo.blog}
-                                    </a>
+                                    </ExternalLink>
                                 </div>
                             )}
                             <div className="flex items-center space-x-3 text-sm">
@@ -231,7 +226,7 @@ export function UserProfileDialog() {
                                 onClick={() => setIsOpen(false)}
                             >
                                 <Link href={`/users/${userInfo.username}`}>
-                                    View Profile
+                                    <span>View Profile</span>
                                 </Link>
                             </Button>
                         </div>

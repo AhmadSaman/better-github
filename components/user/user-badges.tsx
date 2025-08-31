@@ -6,7 +6,7 @@ import {
     Link as LinkIcon,
     UserRoundCheck,
 } from 'lucide-react'
-import Link from 'next/link'
+import { ExternalLink } from '@/components/ui/external-link'
 
 interface PropsType {
     email: string | null
@@ -71,14 +71,13 @@ export default function UserBadges(props: PropsType) {
                     >
                         <IconComponent size={16} />
                         {config.isLink && typeof config.value === 'string' ? (
-                            <Link
-                                href={`https://${config.value}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs hover:underline"
+                            <ExternalLink
+                                href={config.value}
+                                className="text-xs"
+                                iconSize="sm"
                             >
                                 {config.linkText}
-                            </Link>
+                            </ExternalLink>
                         ) : (
                             <p className="text-xs">
                                 {typeof config.value === 'boolean'

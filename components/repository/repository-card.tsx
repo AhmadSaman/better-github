@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Repository } from '@/types/repository'
 import { useState } from 'react'
 import RepositoryDialog from './repository-dialog'
+import { ExternalLink } from '@/components/ui/external-link'
 
 interface RepositoryCardProps {
     repository: Repository
@@ -77,14 +78,13 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
                                 variant={'secondary'}
                                 onClick={(e) => e.stopPropagation()}
                             >
-                                <a
+                                <ExternalLink
                                     href={link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                     className="text-muted-foreground text-xs"
+                                    showIcon={false}
                                 >
                                     <Globe className="h-3 w-3" />
-                                </a>
+                                </ExternalLink>
                             </Button>
                         )}
                         {githubUrl && (
@@ -94,14 +94,13 @@ export default function RepositoryCard({ repository }: RepositoryCardProps) {
                                 variant={'secondary'}
                                 onClick={(e) => e.stopPropagation()}
                             >
-                                <a
+                                <ExternalLink
                                     href={githubUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                     className="text-muted-foreground text-xs"
+                                    showIcon={false}
                                 >
                                     <Github className="h-3 w-3" />
-                                </a>
+                                </ExternalLink>
                             </Button>
                         )}
                     </div>
