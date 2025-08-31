@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Better Github
 
-## Getting Started
+A lightweight web app that uses the GitHub API to
+fetch repositories and users with advanced
+filtering, helpful UI components for fast
+exploration..
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠 Tools & Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [**Next.js**](https://nextjs.org/) – React framework for server-side rendering and routing (used App Router)
+- [**TypeScript**](https://www.typescriptlang.org/) – Type safety for better maintainability
+- [**Tailwind CSS**](https://tailwindcss.com/) – Utility-first styling framework
+- [**shadcn/ui**](https://ui.shadcn.com/) – Prebuilt, accessible UI components
+- [**date-fns**](https://date-fns.org/) – Date formatting and manipulation
+- [**GitHub API**](https://docs.github.com/en/rest) – Data fetching and integration
+- [**Octokit**](https://github.com/octokit) – Official clients for the GitHub API
+- [**Radix-UI**](https://www.radix-ui.com/) – Headless component library that Shadcn uses under the hood
+- [**Lucide-react**](https://www.radix-ui.com/) – For Icons
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Setup Instructions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the repository**
 
-## Learn More
+    ```bash
+    git clone https://github.com/your-username/project-name.git
+    cd project-name
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Add necessary environment variables**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Create `.evn.local` file, For variables you need two environment variables,
+    - `NEXT_PUBLIC_BASE_URL` When running locally add your localhost base URL, but when you deploy, add your base domain URL
+    - `NEXT_PUBLIC_GITHUB_TOKEN` Github token, you can generate one on Github [here](https://github.com/settings/personal-access-tokens)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```env
+    NEXT_PUBLIC_GITHUB_TOKEN
+    NEXT_PUBLIC_BASE_URL
+    ```
 
-## Deploy on Vercel
+    You can also check `.env.example`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Install dependencies**
+    ```bash
+    npm install
+    ```
+4. **Install dependencies**
+    ```bash
+     npm run dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⏱️ Time Spent
+
+| Day       | Description                                                                                                                                                 |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Day 1** | Project setup, initializing repository, brainstorming the Design, Implement users search page, single user Page, and simple search filer, handle dark mode. |
+| **Day 2** | Implement Repositories search page, Repository Dialog page, and simple search filer.                                                                        |
+| **Day 3** | infinite scroll, and advanced search for both users and repositories search page, implement authenticated user dialog, fixed bugs, refactor, final touches  |
+
+## ⚠️ Assumptions
+
+Deployed link is using owners generated github token, to see your personal information use your generated github token.
+
+## 👽 Features
+
+- Added dark mode toggle for UI
+- Advanced filtering
+- Cashing
+- UX features like infinite scroll, debounce, ...etc

@@ -36,7 +36,7 @@ export default function Home() {
                             aria-label="View users"
                         >
                             <Warehouse className="size-6" />
-                            <p className="">Explore Repositories</p>
+                            <p>Explore Repositories</p>
                         </Link>
                     </Button>
                     <Button
@@ -51,7 +51,7 @@ export default function Home() {
                             aria-label="View users"
                         >
                             <Users className="size-6" />
-                            <p className="">Explore Users</p>
+                            <p>Explore Users</p>
                         </Link>
                     </Button>
                 </div>
