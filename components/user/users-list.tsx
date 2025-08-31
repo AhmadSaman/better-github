@@ -1,14 +1,13 @@
 'use client'
 import UserCard from './user-card'
-import { Users } from 'lucide-react'
 import ScrollToTop from '../scroll-to-top'
 import useInfiniteScroll from '@/hooks/use-infinite-scroll'
 import { Skeleton } from '../ui/skeleton'
 import { getUsers } from '@/app/users/actions'
+import { userFilterParams } from '@/types/users'
 
-const UserList = ({
+const UsersList = ({
     users,
-    total,
     search,
     location,
     min_followers,
@@ -17,14 +16,7 @@ const UserList = ({
     max_repos,
 }: {
     users: { name: string; avatarUrl: string }[]
-    total: number
-    search: string
-    location?: string
-    min_followers?: string
-    max_followers?: string
-    min_repos?: string
-    max_repos?: string
-}) => {
+} & userFilterParams) => {
     const { data, ref, hasMore } = useInfiniteScroll<{
         name: string
         avatarUrl: string
@@ -47,10 +39,6 @@ const UserList = ({
 
     return (
         <section className="flex flex-col gap-1">
-            <div className="mx-1 flex items-center gap-1 text-xs font-medium text-gray-400">
-                <Users size={14} />
-                <span className="font-semibold">{total}</span>
-            </div>
             {data.length > 0 ? (
                 <div className="grid grid-cols-2 justify-center gap-5 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
                     {data.map((user) => (
@@ -79,4 +67,4 @@ const UserList = ({
     )
 }
 
-export default UserList
+export default UsersList

@@ -1,13 +1,9 @@
 import SkeletonWrapper from '@/components/skeleton-list-wrapper'
-import SearchFilter from '@/components/search-filter'
-import UsersList from '@/components/user/users-list'
 import UsersListSkeleton from '@/components/user/users-list-skeleton'
 import { Users } from 'lucide-react'
 
-import { getUsers } from '@/app/users/actions'
-import UserAdvancedFilters from '@/components/user/user-advanced-filters'
-
 import React, { Suspense } from 'react'
+import UsersContent from '@/components/user/users-content'
 
 export default async function Page({
     searchParams,
@@ -31,16 +27,7 @@ export default async function Page({
     } = await searchParams
 
     return (
-        <main className="container m-4 mx-auto flex flex-col gap-2 rounded-xl p-8">
-            <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                    <Users size={24} />
-                    <h1 className="text-2xl font-bold">Users</h1>
-                </div>
-                <SearchFilter placeholder="Search for GitHub users by name">
-                    <UserAdvancedFilters />
-                </SearchFilter>
-            </div>
+        <main className="flex flex-col gap-2">
             {search ? (
                 <Suspense
                     key={`${search}-${location || ''}-${min_followers || ''}-${max_followers || ''}-${min_repos || ''}-${max_repos || ''}`}
@@ -50,7 +37,7 @@ export default async function Page({
                         </SkeletonWrapper>
                     }
                 >
-                    <UsersListContent
+                    <UsersContent
                         search={search}
                         location={location}
                         min_followers={min_followers}
@@ -74,44 +61,6 @@ export default async function Page({
                 </div>
             )}
         </main>
-    )
-}
-
-async function UsersListContent({
-    search,
-    location,
-    min_followers,
-    max_followers,
-    min_repos,
-    max_repos,
-}: {
-    search: string
-    location?: string
-    min_followers?: string
-    max_followers?: string
-    min_repos?: string
-    max_repos?: string
-}) {
-    const data = await getUsers({
-        search,
-        page: 1,
-        location,
-        min_followers,
-        max_followers,
-        min_repos,
-        max_repos,
-    })
-    return (
-        <UsersList
-            users={data?.users || []}
-            total={data?.totalCount || 0}
-            search={search}
-            location={location}
-            min_followers={min_followers}
-            max_followers={max_followers}
-            min_repos={min_repos}
-            max_repos={max_repos}
-        />
     )
 }
 
